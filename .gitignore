@@ -1,0 +1,19 @@
+# Node.js Dependencies & Build
+node_modules/
+dist/
+build/
+
+# Python & Test Caches
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Local SQLite Database
+backend/data/*.db
+*.db
+
+# Environment & System Files
+.env
+.DS_Store
+.vscode/
+.idea/

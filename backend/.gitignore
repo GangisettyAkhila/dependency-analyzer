@@ -1,0 +1,11 @@
+# Python & test caches
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Local SQLite Database
+dep_analyzer.db
+
+# Virtual Environment
+venv/
+.venv/
