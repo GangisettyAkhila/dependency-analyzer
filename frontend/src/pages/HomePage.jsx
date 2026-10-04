@@ -43,9 +43,9 @@ export default function HomePage({ onScanComplete, onSelectScan, onNavigatePriva
     <div className="space-y-8 py-4 font-sans">
       {/* Workspace Section */}
       <div className="relative space-y-8">
-        {/* Strengthened cool blue dot-grid background texture (#AFC9E8) */}
+        {/* Subtle cool blue-gray dot-grid background texture */}
         <div 
-          className="absolute inset-x-0 -top-2 h-96 pointer-events-none opacity-60 dark:opacity-45 bg-[radial-gradient(#afc9e8_1.6px,transparent_1.6px)] dark:bg-[radial-gradient(#345279_1.6px,transparent_1.6px)] [background-size:20px_20px] [mask-image:radial-gradient(ellipse_at_center,black_50%,transparent_90%)]" 
+          className="absolute inset-x-0 -top-2 h-96 pointer-events-none opacity-30 dark:opacity-20 bg-[radial-gradient(#cbd5e1_1.2px,transparent_1.2px)] dark:bg-[radial-gradient(#334155_1.2px,transparent_1.2px)] [background-size:20px_20px] [mask-image:radial-gradient(ellipse_at_center,black_50%,transparent_90%)]" 
           aria-hidden="true" 
         />
 
