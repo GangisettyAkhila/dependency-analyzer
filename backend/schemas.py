@@ -1,6 +1,20 @@
 from pydantic import BaseModel
 from typing import List, Optional, Dict, Any
 
+class ProjectCreateRequest(BaseModel):
+    name: str
+    ecosystem: str
+    repository_url: Optional[str] = None
+    user_id: Optional[str] = None
+
+class ProjectResponse(BaseModel):
+    id: str
+    user_id: Optional[str] = None
+    name: str
+    ecosystem: str
+    repository_url: Optional[str] = None
+    created_at: str
+
 class DependencyItem(BaseModel):
     name: str
     version: str
@@ -17,11 +31,12 @@ class DependencyItem(BaseModel):
     vulnerabilities: List[Dict[str, Any]] = []
 
 class ScanRequest(BaseModel):
-    filename: str
+    filename: Optional[str] = "package.json"
     content: str
 
 class ScanSummary(BaseModel):
     id: str
+    project_id: Optional[str] = "default-project"
     filename: str
     ecosystem: str
     scanned_at: str
@@ -34,7 +49,11 @@ class ScanSummary(BaseModel):
     medium_count: int
     low_count: int
     risk_score: int
+    risk_label: Optional[str] = "Low"
+    risk_interpretation: Optional[str] = "Limited identified dependency risk"
 
 class ScanResultResponse(ScanSummary):
+    factor_contributions: Optional[Dict[str, Any]] = None
     dependencies: List[DependencyItem]
     vulnerabilities_flat: List[Dict[str, Any]]
+    ai_briefing: Optional[Dict[str, Any]] = None
