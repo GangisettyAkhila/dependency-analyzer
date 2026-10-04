@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import FileUpload from '../components/FileUpload';
 import { Clock, ArrowRight, ShieldCheck, ShieldAlert } from 'lucide-react';
+import { getApiUrl } from '../config/api';
 
 export default function HomePage({ onScanComplete, onSelectScan, onNavigatePrivacy, isLoading, setIsLoading, error, setError }) {
   const [recentScans, setRecentScans] = useState([]);
@@ -9,7 +10,7 @@ export default function HomePage({ onScanComplete, onSelectScan, onNavigatePriva
   const fetchRecentScans = async () => {
     setLoadingScans(true);
     try {
-      const res = await fetch('/api/scans');
+      const res = await fetch(getApiUrl('/api/scans'));
       if (res.ok) {
         const data = await res.json();
         setRecentScans(data.slice(0, 5)); // show latest 5
@@ -28,7 +29,7 @@ export default function HomePage({ onScanComplete, onSelectScan, onNavigatePriva
   const handleSelectRecent = async (scanId) => {
     if (!onSelectScan) return;
     try {
-      const res = await fetch(`/api/scans/${scanId}`);
+      const res = await fetch(getApiUrl(`/api/scans/${scanId}`));
       if (res.ok) {
         const data = await res.json();
         onSelectScan(data);

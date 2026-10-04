@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { FileJson, FileText, FileCode, UploadCloud, Lock, X, AlertCircle, Sparkles, ShieldCheck, ArrowRight, CheckCircle2, Search, Cpu } from 'lucide-react';
+import { getApiUrl } from '../config/api';
 
 const ALLOWED_FILENAMES = new Set([
   'package.json',
@@ -181,7 +182,7 @@ export default function FileUpload({ onScanComplete, onNavigatePrivacy, isLoadin
     try {
       let res;
       if (rawText && customFilename) {
-        res = await fetch('/api/scan/text', {
+        res = await fetch(getApiUrl('/api/scan/text'), {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ filename: customFilename, content: rawText })
@@ -189,7 +190,7 @@ export default function FileUpload({ onScanComplete, onNavigatePrivacy, isLoadin
       } else if (fileObj) {
         const formData = new FormData();
         formData.append('file', fileObj);
-        res = await fetch('/api/scan', {
+        res = await fetch(getApiUrl('/api/scan'), {
           method: 'POST',
           body: formData
         });

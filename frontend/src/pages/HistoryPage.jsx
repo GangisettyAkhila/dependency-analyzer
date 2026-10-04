@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ConfirmDeleteModal from '../components/ConfirmDeleteModal';
+import { getApiUrl } from '../config/api';
 
 export default function HistoryPage({ onSelectScan, onNavigateHome }) {
   const [scans, setScans] = useState([]);
@@ -15,7 +16,7 @@ export default function HistoryPage({ onSelectScan, onNavigateHome }) {
   const loadScans = async () => {
     setLoading(true);
     try {
-      const res = await fetch('/api/scans');
+      const res = await fetch(getApiUrl('/api/scans'));
       if (!res.ok) throw new Error("Failed to load scan history.");
       const data = await res.json();
       setScans(data);
@@ -33,7 +34,7 @@ export default function HistoryPage({ onSelectScan, onNavigateHome }) {
 
   const handleSelect = async (scanId) => {
     try {
-      const res = await fetch(`/api/scans/${scanId}`);
+      const res = await fetch(getApiUrl(`/api/scans/${scanId}`));
       if (!res.ok) throw new Error("Failed to load scan details.");
       const data = await res.json();
       onSelectScan(data);
@@ -50,7 +51,7 @@ export default function HistoryPage({ onSelectScan, onNavigateHome }) {
     if (!pendingDeleteScan) return;
     setIsDeleting(true);
     try {
-      const res = await fetch(`/api/scans/${pendingDeleteScan.id}`, { method: 'DELETE' });
+      const res = await fetch(getApiUrl(`/api/scans/${pendingDeleteScan.id}`), { method: 'DELETE' });
       if (res.ok) {
         setScans(scans.filter(s => s.id !== pendingDeleteScan.id));
         setPendingDeleteScan(null);
